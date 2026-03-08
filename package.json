@@ -1,0 +1,20 @@
+{
+  "name": "aura",
+  "version": "1.0.0",
+  "description": "Modern Landing Page Template",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "landing-page",
+    "template",
+    "html",
+    "css",
+    "vanilla-js",
+    "glassmorphism"
+  ],
+  "author": "Badr Reda",
+  "license": "MIT"
+}
