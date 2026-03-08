@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Modern Landing Page</title>
+    <!-- Use Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --bg-dark: #0f172a;
+            --text-light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Background animated gradient */
+        .bg-glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0) 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.15) 0%, rgba(15, 23, 42, 0) 40%);
+            z-index: -1;
+            animation: pulse-glow 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1);
+            }
+        }
+
+        nav {
+            padding: 2rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -6px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero {
+            max-width: 800px;
+            animation: fade-in-up 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes fade-in-up {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-accent {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 20px -10px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -10px rgba(168, 85, 247, 0.7);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Glassmorphism card for decorative illustration */
+        .glass-card {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 450px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            animation: float 6s ease-in-out infinite;
+            display: none;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .glass-card {
+                display: flex;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(-50%);
+            }
+
+            50% {
+                transform: translateY(-55%);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        /* Mock UI elements inside the glass card */
+        .skeleton-header {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .skeleton-block {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .skeleton-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .skeleton-item {
+            flex: 1;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .skeleton-text-1 {
+            width: 80%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+        }
+
+        .skeleton-text-2 {
+            width: 60%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+
+    <nav>
+        <div class="logo">Aura.</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero">
+            <h1>
+                <span class="text-gradient">Build beautiful</span><br>
+                <span class="text-gradient">experiences</span> <span class="text-accent">faster.</span>
+            </h1>
+            <p class="subtitle">
+                A sleek, modern template built with pure HTML and CSS. Featuring smooth animations, dark-mode styling,
+                and premium glassmorphism effects.
+            </p>
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary">Get Started Now</a>
+                <a href="#" class="btn btn-secondary">View Documentation</a>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="skeleton-header">
+                <div class="dot" style="background: #ef4444"></div>
+                <div class="dot" style="background: #f59e0b"></div>
+                <div class="dot" style="background: #10b981"></div>
+            </div>
+            <div class="skeleton-block"></div>
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                <div class="skeleton-text-1"></div>
+                <div class="skeleton-text-2"></div>
+            </div>
+            <div class="skeleton-row">
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Adding a small script for an interaction effect on the glass card -->
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const card = document.querySelector('.glass-card');
+            if (card && window.innerWidth >= 1024) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                card.style.transform = `translateY(-50%) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            }
+        });
+
+        // Reset transform on mouse leave window
+        document.addEventListener('mouseleave', () => {
+            const card = document.querySelector('.glass-card');
+            if (card && window.innerWidth >= 1024) {
+                card.style.transform = 'translateY(-50%) rotateY(0deg) rotateX(0deg)';
+                card.style.transition = 'transform 0.5s ease';
+            }
+        });
+
+        // Remove transition when moving
+        document.addEventListener('mouseenter', () => {
+            const card = document.querySelector('.glass-card');
+            if (card) {
+                card.style.transition = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
